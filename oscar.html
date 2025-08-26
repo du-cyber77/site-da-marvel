@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Premiação Anual de Cinema</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display e Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones sociais -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Estilos personalizados */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+        }
+        .font-title {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.2), 0 10px 10px -5px rgba(212, 175, 55, 0.1);
+        }
+        .gallery-img-hover {
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .gallery-img-hover:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- Cabeçalho e Navegação -->
+    <header class="bg-black/80 backdrop-blur-sm sticky top-0 z-50 border-b border-yellow-500/20">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <svg class="w-10 h-10 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>
+                <a href="#" class="text-2xl font-title gold-gradient-text">The Awards</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 text-gray-300" id="nav-menu">
+                <a href="#home" class="hover:text-yellow-400 transition-colors">Início</a>
+                <a href="#nominees" class="hover:text-yellow-400 transition-colors">Indicados</a>
+                <a href="#categories" class="hover:text-yellow-400 transition-colors">Categorias</a>
+                <a href="#gallery" class="hover:text-yellow-400 transition-colors">Galeria</a>
+                <a href="#history" class="hover:text-yellow-400 transition-colors">Momentos</a>
+                <a href="#about" class="hover:text-yellow-400 transition-colors">Sobre</a>
+            </div>
+            <button class="md:hidden text-gray-300" id="mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Menu Mobile -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <a href="#home" class="block py-2 px-4 text-sm hover:bg-gray-700">Início</a>
+            <a href="#nominees" class="block py-2 px-4 text-sm hover:bg-gray-700">Indicados</a>
+            <a href="#categories" class="block py-2 px-4 text-sm hover:bg-gray-700">Categorias</a>
+            <a href="#gallery" class="block py-2 px-4 text-sm hover:bg-gray-700">Galeria</a>
+            <a href="#history" class="block py-2 px-4 text-sm hover:bg-gray-700">Momentos</a>
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700">Sobre</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção Herói -->
+        <section id="home" class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://placehold.co/1920x1080/000000/D4AF37?text=The+97th+Awards');">
+            <div class="text-center bg-black/60 p-10 rounded-lg backdrop-blur-sm">
+                <h1 class="text-5xl md:text-8xl font-title font-black gold-gradient-text">A 97ª Premiação Anual</h1>
+                <p class="text-gray-300 mt-4 text-lg md:text-xl">Celebrando a excelência no cinema.</p>
+            </div>
+        </section>
+
+        <!-- Seção de Indicados Principais -->
+        <section id="nominees" class="py-20 bg-[#111]">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-title text-center mb-12">Principais <span class="gold-gradient-text">Indicados</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <div class="bg-gray-900 rounded-lg overflow-hidden card-hover-effect border border-gray-800">
+                        <img src="https://placehold.co/500x750/1a1a1a/ffffff?text=P%C3%B4ster+do+Filme+A" alt="Pôster do Filme A" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Filme A</h3>
+                            <p class="text-gray-400 mt-2">Melhor Filme</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden card-hover-effect border border-gray-800">
+                        <img src="https://placehold.co/500x750/1a1a1a/ffffff?text=P%C3%B4ster+do+Filme+B" alt="Pôster do Filme B" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Filme B</h3>
+                            <p class="text-gray-400 mt-2">Melhor Direção</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden card-hover-effect border border-gray-800">
+                        <img src="https://placehold.co/500x750/1a1a1a/ffffff?text=Atriz+Principal" alt="Foto da Atriz" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Atriz Famosa</h3>
+                            <p class="text-gray-400 mt-2">Melhor Atriz</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden card-hover-effect border border-gray-800">
+                        <img src="https://placehold.co/500x750/1a1a1a/ffffff?text=Ator+Principal" alt="Foto do Ator" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Ator Famoso</h3>
+                            <p class="text-gray-400 mt-2">Melhor Ator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Todas as Categorias -->
+        <section id="categories" class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-title text-center mb-12">Todas as <span class="gold-gradient-text">Categorias</span></h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-12 gap-y-6">
+                    <div class="border-l-2 border-yellow-500 pl-4">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Melhor Roteiro Original</h3>
+                        <p class="text-gray-400">Reconhece a excelência em roteiros escritos diretamente para o cinema.</p>
+                    </div>
+                    <div class="border-l-2 border-yellow-500 pl-4">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Melhor Roteiro Adaptado</h3>
+                        <p class="text-gray-400">Premia o melhor roteiro baseado em material previamente publicado.</p>
+                    </div>
+                    <div class="border-l-2 border-yellow-500 pl-4">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Melhor Fotografia</h3>
+                        <p class="text-gray-400">Homenageia a arte e a ciência da cinematografia.</p>
+                    </div>
+                    <div class="border-l-2 border-yellow-500 pl-4">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Melhor Figurino</h3>
+                        <p class="text-gray-400">Celebra a criação de figurinos que definem personagens e épocas.</p>
+                    </div>
+                    <div class="border-l-2 border-yellow-500 pl-4">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Melhor Trilha Sonora</h3>
+                        <p class="text-gray-400">Reconhece a música original composta para um filme.</p>
+                    </div>
+                    <div class="border-l-2 border-yellow-500 pl-4">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Melhor Filme de Animação</h3>
+                        <p class="text-gray-400">Premia a excelência em longas-metragens de animação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Galeria do Tapete Vermelho -->
+        <section id="gallery" class="py-20 bg-[#111]">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-title text-center mb-12">Glamour no <span class="gold-gradient-text">Tapete Vermelho</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="overflow-hidden rounded-lg"><img src="https://placehold.co/400x600/1a1a1a/ffffff?text=Look+1" alt="Look 1" class="w-full h-full object-cover gallery-img-hover"></div>
+                    <div class="overflow-hidden rounded-lg"><img src="https://placehold.co/400x600/1a1a1a/ffffff?text=Look+2" alt="Look 2" class="w-full h-full object-cover gallery-img-hover"></div>
+                    <div class="overflow-hidden rounded-lg"><img src="https://placehold.co/400x600/1a1a1a/ffffff?text=Look+3" alt="Look 3" class="w-full h-full object-cover gallery-img-hover"></div>
+                    <div class="overflow-hidden rounded-lg"><img src="https://placehold.co/400x600/1a1a1a/ffffff?text=Look+4" alt="Look 4" class="w-full h-full object-cover gallery-img-hover"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Momentos Históricos -->
+        <section id="history" class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-title text-center mb-12">Momentos <span class="gold-gradient-text">Inesquecíveis</span></h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                        <h3 class="text-2xl font-title text-yellow-400 mb-2">1973</h3>
+                        <p class="text-gray-400">Marlon Brando recusa o Oscar de Melhor Ator e envia Sacheen Littlefeather para discursar em seu lugar.</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                        <h3 class="text-2xl font-title text-yellow-400 mb-2">2002</h3>
+                        <p class="text-gray-400">Halle Berry se torna a primeira mulher negra a ganhar o Oscar de Melhor Atriz.</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                        <h3 class="text-2xl font-title text-yellow-400 mb-2">2020</h3>
+                        <p class="text-gray-400">"Parasita" faz história como o primeiro filme em língua não inglesa a vencer como Melhor Filme.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Fatos Curiosos -->
+        <section id="trivia" class="py-20 bg-[#111]">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-title text-center mb-12">Fatos <span class="gold-gradient-text">Curiosos</span></h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                        <h3 class="text-5xl font-bold gold-gradient-text">26</h3>
+                        <p class="text-gray-400 mt-2">É o número de Oscars ganhos por Walt Disney, o maior vencedor de todos os tempos.</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                        <h3 class="text-5xl font-bold gold-gradient-text">10</h3>
+                        <p class="text-gray-400 mt-2">É a idade que Tatum O'Neal tinha ao ganhar o Oscar, a pessoa mais jovem a conseguir o feito.</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                        <h3 class="text-5xl font-bold gold-gradient-text">3</h3>
+                        <p class="text-gray-400 mt-2">Filmes dividem o recorde de mais vitórias (11): Ben-Hur, Titanic e O Senhor dos Anéis: O Retorno do Rei.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sobre -->
+        <section id="about" class="py-20 bg-black">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl md:text-5xl font-title mb-4">A História da <span class="gold-gradient-text">Premiação</span></h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        Fundada há quase um século, nossa premiação homenageia as maiores conquistas artísticas e técnicas da indústria cinematográfica. É uma noite onde as estrelas brilham, sonhos se realizam e a magia do cinema é celebrada por milhões de pessoas ao redor do mundo. Cada estatueta dourada representa o ápice da dedicação, talento e paixão pela sétima arte.
+                    </p>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://placehold.co/600x400/0d0d0d/D4AF37?text=Estatueta+Dourada" alt="Imagem de uma estatueta" class="rounded-lg shadow-lg">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-black border-t border-yellow-500/20 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fab fa-facebook-f fa-2x"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fab fa-youtube fa-2x"></i></a>
+            </div>
+            <p>&copy; 2024 The Awards. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Design por Gemini</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para o menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fecha o menu mobile ao clicar em um link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>

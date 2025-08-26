@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universo Cinematográfico Marvel - App Complexo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Estilo customizado para a fonte Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Fundo quase preto para um visual mais cinematográfico */
+        }
+        /* Efeito de gradiente no texto do herói */
+        .hero-text-gradient {
+            background: linear-gradient(90deg, #ef4444, #f97316, #eab308);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Animação de fade-in para o conteúdo das abas */
+        @keyframes contentFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .content-fade-in {
+            animation: contentFadeIn 0.5s ease-out forwards;
+        }
+        /* Estilos para o Modal */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        .modal-box {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        /* Estilo para a aba ativa */
+        .nav-link.active {
+            color: #ef4444; /* red-500 */
+            border-bottom-color: #ef4444;
+        }
+    </style>
+</head>
+<body class="text-gray-200 bg-black">
+
+    <!-- Cabeçalho e Navegação por Abas -->
+    <header class="bg-black/80 backdrop-blur-sm sticky top-0 z-50 shadow-lg shadow-red-500/10">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center py-4 border-b border-gray-800">
+                <a href="#" class="text-2xl font-black tracking-wider uppercase">
+                    <span class="text-red-600">MCU</span> Explorer
+                </a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+            <nav id="main-nav" class="hidden md:flex justify-center items-center space-x-8 text-sm uppercase tracking-wider py-3">
+                <a href="#" class="nav-link active border-b-2 border-transparent hover:text-red-500 transition-colors duration-300 pb-2" data-tab="home">Início</a>
+                <a href="#" class="nav-link border-b-2 border-transparent hover:text-red-500 transition-colors duration-300 pb-2" data-tab="filmes">Filmes</a>
+                <a href="#" class="nav-link border-b-2 border-transparent hover:text-red-500 transition-colors duration-300 pb-2" data-tab="personagens">Personagens</a>
+                <a href="#" class="nav-link border-b-2 border-transparent hover:text-red-500 transition-colors duration-300 pb-2" data-tab="joias">Joias do Infinito</a>
+                <a href="#" class="nav-link border-b-2 border-transparent hover:text-red-500 transition-colors duration-300 pb-2" data-tab="curiosidades">Curiosidades</a>
+            </nav>
+        </div>
+         <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden">
+             <nav class="flex flex-col items-center text-sm uppercase tracking-wider py-3 space-y-3">
+                <a href="#" class="nav-link-mobile w-full text-center py-2 hover:bg-gray-800" data-tab="home">Início</a>
+                <a href="#" class="nav-link-mobile w-full text-center py-2 hover:bg-gray-800" data-tab="filmes">Filmes</a>
+                <a href="#" class="nav-link-mobile w-full text-center py-2 hover:bg-gray-800" data-tab="personagens">Personagens</a>
+                <a href="#" class="nav-link-mobile w-full text-center py-2 hover:bg-gray-800" data-tab="joias">Joias do Infinito</a>
+                <a href="#" class="nav-link-mobile w-full text-center py-2 hover:bg-gray-800" data-tab="curiosidades">Curiosidades</a>
+             </nav>
+        </div>
+    </header>
+
+    <!-- Container Principal do Conteúdo -->
+    <main id="content-container" class="container mx-auto px-6 py-12">
+        <!-- O conteúdo será injetado aqui pelo JavaScript -->
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2024 MCU Explorer. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Este é um site de fã não oficial e não é afiliado à Marvel Studios.</p>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="to-top-button" class="hidden fixed bottom-5 right-5 bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Modal de Personagem -->
+    <div id="character-modal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4 opacity-0">
+        <div class="modal-box bg-gray-800 rounded-lg shadow-2xl w-full max-w-lg mx-auto p-6 relative opacity-0 transform scale-95">
+            <button id="close-modal-button" class="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times fa-lg"></i>
+            </button>
+            <div class="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-6">
+                <img id="modal-img" src="" alt="Imagem do Personagem" class="w-40 h-40 rounded-full flex-shrink-0 border-8 border-gray-800 object-cover -mt-24 sm:mt-0">
+                <div class="text-center sm:text-left mt-4 sm:mt-0">
+                    <h2 id="modal-name" class="text-3xl font-bold">Nome do Personagem</h2>
+                    <p id="modal-bio" class="text-gray-300 mt-2"></p>
+                    <div class="mt-4">
+                        <h4 class="font-bold text-red-400">Primeira Aparição:</h4>
+                        <p id="modal-appearance" class="text-gray-300"></p>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="font-bold text-red-400">Poderes e Habilidades:</h4>
+                        <ul id="modal-powers" class="list-disc list-inside text-gray-300"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- DATABASE ---
+        const database = {
+            personagens: [
+                { name: "Homem de Ferro", bio: "Gênio, bilionário, playboy, filantropo. Tony Stark construiu uma armadura para se tornar o invencível Homem de Ferro.", img: "https://placehold.co/200x200/ef4444/ffffff?text=Iron+Man", appearance: "Homem de Ferro (2008)", powers: "Intelecto genial|Mestre em engenharia|Armadura de alta tecnologia" },
+                { name: "Capitão América", bio: "Steve Rogers, um supersoldado da Segunda Guerra, tornou-se o farol da esperança e líder dos Vingadores.", img: "https://placehold.co/200x200/3b82f6/ffffff?text=Cap.+America", appearance: "Capitão América: O Primeiro Vingador (2011)", powers: "Força e agilidade sobre-humanas|Mestre em combate corpo a corpo|Escudo de Vibranium" },
+                { name: "Thor", bio: "O Deus do Trovão de Asgard, Thor Odinson empunha armas poderosas e defende os Nove Reinos.", img: "https://placehold.co/200x200/f59e0b/ffffff?text=Thor", appearance: "Thor (2011)", powers: "Força e longevidade Asgardiana|Manipulação de raios|Voo" },
+                { name: "Hulk", bio: "Exposto a radiação gama, o Dr. Bruce Banner se transforma no incrível e incontrolável Hulk quando enfurecido.", img: "https://placehold.co/200x200/10b981/ffffff?text=Hulk", appearance: "O Incrível Hulk (2008)", powers: "Força e durabilidade ilimitadas|Fator de cura regenerativo|Salto super-humano" },
+                { name: "Viúva Negra", bio: "Natasha Romanoff, uma espiã e assassina altamente treinada, que se tornou uma Vingadora.", img: "https://placehold.co/200x200/1f2937/ffffff?text=Black+Widow", appearance: "Homem de Ferro 2 (2010)", powers: "Mestre em artes marciais e espionagem|Atiradora de elite|Agilidade no pico humano" },
+                { name: "Feiticeira Escarlate", bio: "Wanda Maximoff, uma das mais poderosas manipuladoras de magia, capaz de alterar a própria realidade.", img: "https://placehold.co/200x200/be123c/ffffff?text=Scarlet+Witch", appearance: "Vingadores: Era de Ultron (2015)", powers: "Magia do Caos|Manipulação da realidade|Telecinese e telepatia" },
+                { name: "Thanos", bio: "O Titã Louco obcecado em trazer equilíbrio ao universo, buscando as Joias do Infinito.", img: "https://placehold.co/200x200/9333ea/ffffff?text=Thanos", appearance: "Os Vingadores (2012)", powers: "Força e intelecto sobre-humanos|Durabilidade imensa|Manopla do Infinito" },
+                { name: "Loki", bio: "O Deus da Trapaça e irmão adotivo de Thor, cujas ambições causaram inúmeros conflitos.", img: "https://placehold.co/200x200/10b981/ffffff?text=Loki", appearance: "Thor (2011)", powers: "Mestre da ilusão e enganação|Metamorfose|Magia Asgardiana" },
+            ],
+            filmes: [
+                { title: "Os Vingadores", year: 2012, synopsis: "Heróis se unem pela primeira vez para impedir que Loki e seu exército alienígena escravizem a humanidade.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Vingadores", saga: "infinito" },
+                { title: "Guerra Infinita", year: 2018, synopsis: "Os Vingadores e seus aliados devem estar dispostos a sacrificar tudo para derrotar o poderoso Thanos.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Guerra+Infinita", saga: "infinito" },
+                { title: "Ultimato", year: 2019, synopsis: "Os heróis restantes se unem para uma última batalha para restaurar a ordem no universo.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Ultimato", saga: "infinito" },
+                { title: "Pantera Negra", year: 2018, synopsis: "T'Challa, herdeiro de Wakanda, deve liderar seu povo e confrontar um adversário de seu passado.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Pantera+Negra", saga: "infinito" },
+                { title: "Guardiões da Galáxia", year: 2014, synopsis: "Um grupo de desajustados intergalácticos se une para impedir um fanático guerreiro de controlar o universo.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Guardiões", saga: "infinito" },
+                { title: "Doutor Estranho no Multiverso da Loucura", year: 2022, synopsis: "Dr. Estranho protege uma adolescente que viaja pelo multiverso, perseguida por uma Wanda Maximoff corrompida.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Multiverso", saga: "multiverso" },
+                { title: "Homem-Aranha: Sem Volta Para Casa", year: 2021, synopsis: "A identidade do Homem-Aranha é revelada, e ele busca a ajuda do Doutor Estranho para reverter o caos.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Homem-Aranha", saga: "multiverso" },
+                { title: "Loki (Série)", year: 2021, synopsis: "Uma versão alternativa de Loki é capturada pela Autoridade de Variação Temporal, alterando a linha do tempo sagrada.", poster: "https://placehold.co/500x750/1f2937/ffffff?text=Loki", saga: "multiverso" },
+            ]
+        };
+
+        // --- ELEMENTOS DO DOM ---
+        const contentContainer = document.getElementById('content-container');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // --- RENDER FUNCTIONS ---
+        const renderHome = () => {
+            contentContainer.innerHTML = `
+                <div class="text-center content-fade-in">
+                    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter hero-text-gradient">Bem-vindo ao MCU Explorer</h1>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
+                        Sua central de informações sobre o Universo Cinematográfico Marvel. Navegue pelas abas para explorar filmes, personagens e muito mais.
+                    </p>
+                    <img src="https://placehold.co/1200x500/0a0a0a/1f2937?text=Universo+Marvel" alt="Banner do Universo Marvel" class="w-full h-auto rounded-lg mt-8 shadow-lg">
+                </div>
+            `;
+        };
+
+        const renderFilmes = (filter = 'todos') => {
+            const filteredFilmes = filter === 'todos' ? database.filmes : database.filmes.filter(f => f.saga === filter);
+            const filmesHTML = filteredFilmes.map(filme => `
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col">
+                    <img src="${filme.poster}" alt="Pôster de ${filme.title}" class="w-full h-auto object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold mb-2">${filme.title} (${filme.year})</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">${filme.synopsis}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            contentContainer.innerHTML = `
+                <div class="content-fade-in">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold uppercase tracking-wide">Filmografia</h2>
+                        <div id="filter-buttons" class="mt-4 space-x-2">
+                            <button class="filter-btn bg-gray-700 hover:bg-red-600 px-4 py-2 rounded-lg transition-colors" data-filter="todos">Todos</button>
+                            <button class="filter-btn bg-gray-700 hover:bg-red-600 px-4 py-2 rounded-lg transition-colors" data-filter="infinito">Saga do Infinito</button>
+                            <button class="filter-btn bg-gray-700 hover:bg-red-600 px-4 py-2 rounded-lg transition-colors" data-filter="multiverso">Saga do Multiverso</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        ${filmesHTML}
+                    </div>
+                </div>
+            `;
+            addFilterListeners();
+        };
+
+        const renderPersonagens = () => {
+            const personagensHTML = database.personagens.map(p => `
+                 <div class="character-card group text-center cursor-pointer" data-name="${p.name}" data-bio="${p.bio}" data-img="${p.img}" data-appearance="${p.appearance}" data-powers="${p.powers}">
+                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-gray-700 group-hover:border-red-500 transition-all duration-300 transform group-hover:scale-110">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="mt-4 text-lg font-semibold">${p.name}</h3>
+                </div>
+            `).join('');
+            
+            contentContainer.innerHTML = `
+                 <div class="content-fade-in">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold uppercase tracking-wide">Heróis e Vilões</h2>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                        ${personagensHTML}
+                    </div>
+                </div>
+            `;
+            addCharacterCardListeners();
+        };
+
+        const renderJoias = () => {
+            contentContainer.innerHTML = `
+                <div class="content-fade-in">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold uppercase tracking-wide">As Joias do Infinito</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-800 rounded-lg p-6 flex items-start space-x-4 shadow-lg border-l-4 border-blue-500"><div class="text-4xl text-blue-500"><i class="fas fa-cube"></i></div><div><h3 class="text-2xl font-bold text-blue-400">Espaço</h3><p class="text-gray-400 mt-1">Permite ao usuário existir em qualquer local, teletransportar-se e manipular o espaço.</p></div></div>
+                        <div class="bg-gray-800 rounded-lg p-6 flex items-start space-x-4 shadow-lg border-l-4 border-yellow-500"><div class="text-4xl text-yellow-500"><i class="fas fa-brain"></i></div><div><h3 class="text-2xl font-bold text-yellow-400">Mente</h3><p class="text-gray-400 mt-1">Dá ao portador poderes psíquicos, incluindo telepatia e telecinese, e pode controlar mentes.</p></div></div>
+                        <div class="bg-gray-800 rounded-lg p-6 flex items-start space-x-4 shadow-lg border-l-4 border-red-500"><div class="text-4xl text-red-500"><i class="fas fa-atom"></i></div><div><h3 class="text-2xl font-bold text-red-400">Realidade</h3><p class="text-gray-400 mt-1">Capaz de alterar a realidade para o que o usuário desejar e ignorar as leis da física.</p></div></div>
+                        <div class="bg-gray-800 rounded-lg p-6 flex items-start space-x-4 shadow-lg border-l-4 border-purple-500"><div class="text-4xl text-purple-500"><i class="fas fa-fist-raised"></i></div><div><h3 class="text-2xl font-bold text-purple-400">Poder</h3><p class="text-gray-400 mt-1">Concede força e durabilidade imensas, manipula energia e pode destruir planetas.</p></div></div>
+                        <div class="bg-gray-800 rounded-lg p-6 flex items-start space-x-4 shadow-lg border-l-4 border-green-500"><div class="text-4xl text-green-500"><i class="fas fa-clock"></i></div><div><h3 class="text-2xl font-bold text-green-400">Tempo</h3><p class="text-gray-400 mt-1">Permite ao usuário ver o passado e o futuro, parar, acelerar ou reverter o fluxo do tempo.</p></div></div>
+                        <div class="bg-gray-800 rounded-lg p-6 flex items-start space-x-4 shadow-lg border-l-4 border-orange-500"><div class="text-4xl text-orange-500"><i class="fas fa-heart"></i></div><div><h3 class="text-2xl font-bold text-orange-400">Alma</h3><p class="text-gray-400 mt-1">Permite ao usuário manipular almas, vivas ou mortas, e tem consciência própria.</p></div></div>
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderCuriosidades = () => {
+             contentContainer.innerHTML = `
+                <div class="content-fade-in">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold uppercase tracking-wide">Curiosidades do MCU</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="bg-gray-800 rounded-lg p-6"><p><strong class="text-red-400">Improviso de Gênio:</strong> A famosa frase "Eu sou o Homem de Ferro" no final do primeiro filme foi totalmente improvisada por Robert Downey Jr.</p></div>
+                        <div class="bg-gray-800 rounded-lg p-6"><p><strong class="text-red-400">Escudo Leve:</strong> O escudo do Capitão América, que na história é feito de Vibranium e pesa 5,4 kg, tinha várias versões no set, incluindo uma de borracha para acrobacias.</p></div>
+                        <div class="bg-gray-800 rounded-lg p-6"><p><strong class="text-red-400">"I am Groot":</strong> Vin Diesel gravou a fala "Eu sou Groot" em mais de 15 idiomas diferentes para as estreias internacionais do filme.</p></div>
+                        <div class="bg-gray-800 rounded-lg p-6"><p><strong class="text-red-400">Pós-Créditos:</strong> A tradição das cenas pós-créditos começou com *Homem de Ferro* (2008), mostrando a aparição de Nick Fury e dando início à Iniciativa Vingadores.</p></div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // --- TAB NAVIGATION ---
+        const switchTab = (tabName) => {
+            contentContainer.innerHTML = ''; // Limpa o conteúdo
+            switch (tabName) {
+                case 'home': renderHome(); break;
+                case 'filmes': renderFilmes(); break;
+                case 'personagens': renderPersonagens(); break;
+                case 'joias': renderJoias(); break;
+                case 'curiosidades': renderCuriosidades(); break;
+                default: renderHome();
+            }
+        };
+
+        const setActiveTab = (tabElement) => {
+            navLinks.forEach(link => link.classList.remove('active'));
+            if (tabElement) {
+                tabElement.classList.add('active');
+            }
+        };
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabName = e.target.dataset.tab;
+                setActiveTab(e.target);
+                switchTab(tabName);
+            });
+        });
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabName = e.target.dataset.tab;
+                mobileMenu.classList.add('hidden'); // Fecha o menu mobile
+                switchTab(tabName);
+            });
+        });
+
+        // --- EVENT LISTENERS ---
+        const addFilterListeners = () => {
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    renderFilmes(e.target.dataset.filter);
+                });
+            });
+        };
+        
+        const addCharacterCardListeners = () => {
+            document.querySelectorAll('.character-card').forEach(card => {
+                card.addEventListener('click', () => openModal(card));
+            });
+        };
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('character-modal');
+        const modalBox = modal.querySelector('.modal-box');
+        const closeModalButton = document.getElementById('close-modal-button');
+        const modalImg = document.getElementById('modal-img');
+        const modalName = document.getElementById('modal-name');
+        const modalBio = document.getElementById('modal-bio');
+        const modalAppearance = document.getElementById('modal-appearance');
+        const modalPowers = document.getElementById('modal-powers');
+
+        const openModal = (card) => {
+            modalImg.src = card.dataset.img;
+            modalName.textContent = card.dataset.name;
+            modalBio.textContent = card.dataset.bio;
+            modalAppearance.textContent = card.dataset.appearance;
+            modalPowers.innerHTML = '';
+            card.dataset.powers.split('|').forEach(power => {
+                const li = document.createElement('li');
+                li.textContent = power;
+                modalPowers.appendChild(li);
+            });
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalBox.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        };
+
+        const closeModal = () => {
+            modal.classList.add('opacity-0');
+            modalBox.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        };
+
+        closeModalButton.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal();
+        });
+
+        // --- SCROLL TO TOP BUTTON ---
+        const toTopButton = document.getElementById('to-top-button');
+        window.addEventListener('scroll', () => {
+            toTopButton.classList.toggle('hidden', window.scrollY < 300);
+        });
+        toTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- INITIAL LOAD ---
+        renderHome();
+    });
+    </script>
+</body>
+</html>
